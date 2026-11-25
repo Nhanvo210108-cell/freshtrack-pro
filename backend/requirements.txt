@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+pyjwt
+bcrypt
+numpy
+scikit-learn
+requests
