@@ -73,11 +73,7 @@ export function LiveMonitor({
   const latest = history[history.length - 1] || null;
   const chartData = history.map((pt, idx) => ({
     index: idx + 1,
-    time: new Date(pt.timestamp).toLocaleTimeString("vi-VN", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    }),
+    time: new Date(String(pt.timestamp).endsWith('Z') ? pt.timestamp : pt.timestamp + 'Z').toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', second: '2-digit' }),
     temp_c: pt.temp_c,
     ethylene_ppm: pt.ethylene_ppm,
     rsl_hours: pt.rsl_hours,
@@ -311,7 +307,7 @@ export function LiveMonitor({
                 {[...history].reverse().slice(0, 8).map((row) => (
                   <tr key={row.id} className="text-slate-700">
                     <td className="py-2 pr-3 font-mono text-[11px] text-slate-500">
-                      {new Date(row.timestamp).toLocaleTimeString("vi-VN")}
+                      {new Date(String(row.timestamp).endsWith('Z') ? row.timestamp : row.timestamp + 'Z').toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                     </td>
                     <td className="py-2 px-3">{row.location}</td>
                     <td className="py-2 px-3 font-mono">{row.temp_c}°C</td>
